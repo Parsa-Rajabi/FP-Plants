@@ -58,6 +58,11 @@ function endGame() {
  */
 function initGraphics() {
 
+//    stage.addChild(willow);
+    stage.addChild(warning);
+    okButton.x = 350;
+    okButton.y = 550;
+    stage.addChild(okButton);
     initMuteUnMuteButtons();
     initListeners();
 
@@ -100,19 +105,27 @@ function initListeners() {
 
 // bitmap variables
 var muteButton, unmuteButton;
+var willow, white, western, trembling, cascara, black;
+var warning, okButton, okButtonPressed;
 /*
  * Add files to be loaded here.
  */
 function setupManifest() {
     manifest = [
-       {
-            src: "images/mute.png",
-            id: "mute"
-    },
-        {
-            src: "images/unmute.png",
-            id: "unmute"
-    }
+       
+        {src: "images/willow.png", id: "willow" },
+        {src: "images/white.png", id: "white" },
+        {src: "images/western.png", id: "western" },
+        {src: "images/trembling.png", id: "trembling" },
+        {src: "images/cascara.png", id: "cascara" },
+        {src: "images/black.png", id: "black" },
+        {src: "images/warning.png", id: "warning" },
+        {src: "images/ok.png", id: "okButton" },
+        {src: "images/okPressed.png", id: "okButtonPressed" },
+        
+
+        {src: "images/mute.png", id: "mute" },
+        {src: "images/unmute.png", id: "unmute"}
  	];
 }
 
@@ -133,11 +146,18 @@ function startPreload() {
 function handleFileLoad(event) {
     console.log("A file has loaded of type: " + event.item.type);
     // create bitmaps of images
-    if (event.item.id == "mute") {
-        muteButton = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "unmute") {
-        unmuteButton = new createjs.Bitmap(event.result);
-    } 
+    if (event.item.id == "mute") { muteButton = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "unmute") { unmuteButton = new createjs.Bitmap(event.result);
+                                           
+    } else if (event.item.id == "willow") { willow = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "white") { white = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "western") { western = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "trembling") { trembling = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "cascara") { cascara = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "black") { black = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "warning") { warning = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "okButton") { okButton = new createjs.Bitmap(event.result);
+    }else if (event.item.id == "okButtonPressed") { okButtonPressed = new createjs.Bitmap(event.result);
 }
 
 function loadError(evt) {
@@ -159,7 +179,7 @@ function loadComplete(event) {
     createjs.Ticker.setFPS(FPS);
     createjs.Ticker.addEventListener("tick", update); // call update function
 
-    stage.addChild(background);
+//    stage.addChild(background);
     stage.update();
     initGraphics();
 }
