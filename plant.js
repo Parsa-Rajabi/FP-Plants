@@ -28,7 +28,7 @@ function init() {
     // init state object
     stage = new createjs.Stage("gameCanvas"); // canvas id is gameCanvas
     stage.mouseEventsEnabled = true;
-    stage.enableMouseOver(); // Default, checks the mouse 20 times/second for hovering cursor changes
+    stage.enableMouseOver(50); // Default, checks the mouse 20 times/second for hovering cursor changes
 
     setupManifest(); // preloadJS
     startPreload();
@@ -42,6 +42,8 @@ function init() {
 
 function update(event) {
     if (gameStarted) {
+            stage.enableMouseOver(50); // Default, checks the mouse 20 times/second for hovering cursor changes
+
         if (okButton.visible == false) {
             clicked = true;
         }
@@ -68,8 +70,6 @@ function initGraphics() {
     okButton.x = okButtonPressed.x = 350;
     okButton.y = okButtonPressed.y = 550;
 
-    var iconY = 14.25;
-    //    willowIcon.y = willowIconHover.y = 14.25;
     willowIcon.x = willowIconHover.x = 14.25;
     willowIcon.y = willowIconHover.y = 20;
 
@@ -120,7 +120,7 @@ function initMuteUnMuteButtons() {
     muteButton.on("click", toggleMute);
     unmuteButton.on("click", toggleMute);
 
-    stage.addChild(unmuteButton);
+//    stage.addChild(unmuteButton);
 }
 
 /*
@@ -329,6 +329,7 @@ function addIcons() {
 function ok() {
 
     okButton.visible = false;
+    okButtonPressed.visible = false;
     warning.visible = false;
 }
 
