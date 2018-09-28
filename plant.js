@@ -5,19 +5,15 @@
  * Date September 2018
  */
 
-//TO DO:
-//Remove the icons from each picture
-//Add some height to each icon for better placement of hover
+
 
 //// VARIABLES ////
 
 var mute = false;
-var FPS = 40;
+var FPS = 20;
 var STAGE_WIDTH, STAGE_HEIGHT;
 var gameStarted = false;
 var clicked = false;
-
-
 
 // Chrome 1+
 var isChrome = !!window.chrome && !!window.chrome.webstore;
@@ -45,7 +41,12 @@ function init() {
 
 
 function update(event) {
-    if (gameStarted) {}
+    if (gameStarted) {
+        if (okButton.visible == false) {
+            clicked = true;
+        }
+        initListeners();
+    }
 
     stage.update(event);
 }
@@ -63,7 +64,7 @@ function endGame() {
  * Place graphics and add them to the stage.
  */
 function initGraphics() {
-    
+
     okButton.x = okButtonPressed.x = 350;
     okButton.y = okButtonPressed.y = 550;
 
@@ -74,35 +75,24 @@ function initGraphics() {
 
     whiteIcon.x = whiteIconHover.x = 150;
     whiteIcon.y = whiteIconHover.y = 20;
-    
+
     westernIcon.x = westernIconHover.x = 295;
     westernIcon.y = westernIconHover.y = 20;
-    
+
     blackIcon.x = blackIconHover.x = 432;
     blackIcon.y = blackIconHover.y = 20;
-    
+
     cascaraIcon.x = cascaraIconHover.x = 557;
     cascaraIcon.y = cascaraIconHover.y = 20;
-    
+
     tremplingIcon.x = tremplingIconHover.x = 700;
     tremplingIcon.y = tremplingIconHover.y = 20;
- 
-    
+
+
 
     stage.addChild(willow);
     stage.addChild(willowIcon, whiteIcon, westernIcon, blackIcon, cascaraIcon, tremplingIcon);
-    //       cascaraIcon, tremplingIcon
 
-    //    willowIcon.x = willowIconHover.x = 20;
-
-    //    whiteIcon
-    //    if (addScreen) {
-
-
-
-
-    //     whiteIcon, westernIcon, blackIcon, cascaraIcon, tremplingIcon
-    //    stage.addChild(willowIcon);
     stage.addChild(warning);
     stage.addChild(okButton);
     initMuteUnMuteButtons();
@@ -141,13 +131,13 @@ function initListeners() {
     okButton.on("mouseover", function () {
         stage.addChild(okButtonPressed);
         stage.removeChild(okButton);
-        console.log("mouseover");
+
         //        playSound("click");
     });
     okButtonPressed.on("mouseout", function () {
         stage.addChild(okButton);
         stage.removeChild(okButtonPressed);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     okButtonPressed.on("click", ok);
@@ -155,91 +145,98 @@ function initListeners() {
 
 
     willowIcon.on("mouseover", function () {
-        stage.addChild(willowIconHover);
-        stage.removeChild(willowIcon);
-        console.log("mouseover");
-        //        playSound("click");
+        if (clicked) {
+            stage.addChild(willowIconHover);
+            stage.removeChild(willowIcon);
+        }
     });
     willowIconHover.on("mouseout", function () {
         stage.addChild(willowIcon);
         stage.removeChild(willowIconHover);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     willowIconHover.on("click", willowPage);
-    
-    
-    
-     whiteIcon.on("mouseover", function () {
-        stage.addChild(whiteIconHover);
-        stage.removeChild(whiteIcon);
-        console.log("mouseover");
-        //        playSound("click");
+
+
+
+    whiteIcon.on("mouseover", function () {
+        if (clicked) {
+            stage.addChild(whiteIconHover);
+            stage.removeChild(whiteIcon);
+        }
+
     });
     whiteIconHover.on("mouseout", function () {
+
         stage.addChild(whiteIcon);
         stage.removeChild(whiteIconHover);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     whiteIconHover.on("click", whitePage);
 
-    
+
     westernIcon.on("mouseover", function () {
-        stage.addChild(westernIconHover);
-        stage.removeChild(westernIcon);
-        console.log("mouseover");
-        //        playSound("click");
+        if (clicked) {
+            stage.addChild(westernIconHover);
+            stage.removeChild(westernIcon);
+        }
+
     });
     westernIconHover.on("mouseout", function () {
         stage.addChild(westernIcon);
         stage.removeChild(westernIconHover);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     westernIconHover.on("click", westernPage);
-    
-    
-    
+
+
+
     blackIcon.on("mouseover", function () {
-        stage.addChild(blackIconHover);
-        stage.removeChild(blackIcon);
-        console.log("mouseover");
-        //        playSound("click");
+        if (clicked) {
+            stage.addChild(blackIconHover);
+            stage.removeChild(blackIcon);
+        }
     });
     blackIconHover.on("mouseout", function () {
         stage.addChild(blackIcon);
         stage.removeChild(blackIconHover);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     blackIconHover.on("click", blackPage);
-    
-    
-     cascaraIcon.on("mouseover", function () {
-        stage.addChild(cascaraIconHover);
-        stage.removeChild(cascaraIcon);
-        console.log("mouseover");
-        //        playSound("click");
+
+
+    cascaraIcon.on("mouseover", function () {
+        if (clicked) {
+            stage.addChild(cascaraIconHover);
+            stage.removeChild(cascaraIcon);
+        }
+
+
     });
     cascaraIconHover.on("mouseout", function () {
         stage.addChild(cascaraIcon);
         stage.removeChild(cascaraIconHover);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     cascaraIconHover.on("click", cascaraPage);
-    
+
     tremplingIcon.on("mouseover", function () {
-        stage.addChild(tremplingIconHover);
-        stage.removeChild(tremplingIcon);
-        console.log("mouseover");
-        //        playSound("click");
+        if (clicked) {
+            stage.addChild(tremplingIconHover);
+            stage.removeChild(tremplingIcon);
+        }
+
+
     });
     tremplingIconHover.on("mouseout", function () {
         stage.addChild(tremplingIcon);
         stage.removeChild(tremplingIconHover);
-        console.log("mouseout");
+
     });
     //once pressed, the fire function will be called 
     tremplingIconHover.on("click", tremplingPage);
@@ -267,7 +264,7 @@ function willowPage() {
 function whitePage() {
 
     stage.removeChild(willow);
-//    stage.removeChild(white);
+    //    stage.removeChild(white);
     stage.removeChild(western);
     stage.removeChild(trembling);
     stage.removeChild(cascara);
@@ -280,7 +277,7 @@ function whitePage() {
 function westernPage() {
     stage.removeChild(willow);
     stage.removeChild(white);
-//    stage.removeChild(western);
+    //    stage.removeChild(western);
     stage.removeChild(trembling);
     stage.removeChild(cascara);
     stage.removeChild(black);
@@ -295,7 +292,7 @@ function blackPage() {
     stage.removeChild(western);
     stage.removeChild(trembling);
     stage.removeChild(cascara);
-//    stage.removeChild(black);
+    //    stage.removeChild(black);
     stage.addChild(black);
 
     addIcons();
@@ -306,7 +303,7 @@ function cascaraPage() {
     stage.removeChild(white);
     stage.removeChild(western);
     stage.removeChild(trembling);
-//    stage.removeChild(cascara);
+    //    stage.removeChild(cascara);
     stage.removeChild(black);
     stage.addChild(cascara);
 
@@ -317,7 +314,7 @@ function tremplingPage() {
     stage.removeChild(willow);
     stage.removeChild(white);
     stage.removeChild(western);
-//    stage.removeChild(trembling);
+    //    stage.removeChild(trembling);
     stage.removeChild(cascara);
     stage.removeChild(black);
     stage.addChild(trembling);
@@ -327,15 +324,12 @@ function tremplingPage() {
 
 function addIcons() {
     stage.addChild(willowIcon, whiteIcon, westernIcon, tremplingIcon, cascaraIcon, blackIcon);
-
 }
 
 function ok() {
+
     okButton.visible = false;
     warning.visible = false;
-
-    clicked = true;
-
 }
 
 //////////////////////// PRELOADJS FUNCTIONS
