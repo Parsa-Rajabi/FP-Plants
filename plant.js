@@ -5,10 +5,14 @@
  * Date September 2018
  */
 
+//TO DO:
+//Remove the icons from each picture
+//Add some height to each icon for better placement of hover
+
 //// VARIABLES ////
 
 var mute = false;
-var FPS = 20;
+var FPS = 40;
 var STAGE_WIDTH, STAGE_HEIGHT;
 var gameStarted = false;
 var clicked = false;
@@ -41,14 +45,7 @@ function init() {
 
 
 function update(event) {
-    if (gameStarted) {
-        //        if (clicked){
-        //            console.log(clicked + " wow ");
-
-        //        }
-
-        //            addScreen = true;
-    }
+    if (gameStarted) {}
 
     stage.update(event);
 }
@@ -66,44 +63,48 @@ function endGame() {
  * Place graphics and add them to the stage.
  */
 function initGraphics() {
-    stage.addChild(warning);
+    
     okButton.x = okButtonPressed.x = 350;
     okButton.y = okButtonPressed.y = 550;
-    stage.addChild(okButton);
 
-    willowIcon.y = 14.25;
-    willowIcon.x = 20;
+    var iconY = 14.25;
+    //    willowIcon.y = willowIconHover.y = 14.25;
+    willowIcon.x = willowIconHover.x = 14.25;
+    willowIcon.y = willowIconHover.y = 20;
 
-    //    if (addScreen) {
+    whiteIcon.x = whiteIconHover.x = 150;
+    whiteIcon.y = whiteIconHover.y = 20;
+    
+    westernIcon.x = westernIconHover.x = 295;
+    westernIcon.y = westernIconHover.y = 20;
+    
+    blackIcon.x = blackIconHover.x = 432;
+    blackIcon.y = blackIconHover.y = 20;
+    
+    cascaraIcon.x = cascaraIconHover.x = 557;
+    cascaraIcon.y = cascaraIconHover.y = 20;
+    
+    tremplingIcon.x = tremplingIconHover.x = 700;
+    tremplingIcon.y = tremplingIconHover.y = 20;
+ 
+    
+
     stage.addChild(willow);
-    stage.addChild(willowIcon);
+    stage.addChild(willowIcon, whiteIcon, westernIcon, blackIcon, cascaraIcon, tremplingIcon);
+    //       cascaraIcon, tremplingIcon
 
-    //    }
-    //    okButton.x  = 350;
-    //    okButton.y  = 550;
-    //
-    //    if (!clicked) {
-    //    } else if (clicked) {
-    //        stage.removeChild(okButton);
-    //        stage.addChild(willow);
-    //    }
+    //    willowIcon.x = willowIconHover.x = 20;
+
+    //    whiteIcon
+    //    if (addScreen) {
 
 
 
-    //    whiteIcon.y = westernIcon.y = blackIcon.y = cascaraIcon.y = tremplingIcon.y = 14.25;
-
-    //    var iconX = 10;
-
-
-    //    whiteIcon.x = iconX + 10;
-    //    westernIcon.x = iconX
-    //    blackIcon.x = 
-    //    cascaraIcon.x = 
-    //    tremplingIcon.x = 
 
     //     whiteIcon, westernIcon, blackIcon, cascaraIcon, tremplingIcon
     //    stage.addChild(willowIcon);
-
+    stage.addChild(warning);
+    stage.addChild(okButton);
     initMuteUnMuteButtons();
     initListeners();
     // start the game
@@ -150,11 +151,189 @@ function initListeners() {
     });
     //once pressed, the fire function will be called 
     okButtonPressed.on("click", ok);
+
+
+
+    willowIcon.on("mouseover", function () {
+        stage.addChild(willowIconHover);
+        stage.removeChild(willowIcon);
+        console.log("mouseover");
+        //        playSound("click");
+    });
+    willowIconHover.on("mouseout", function () {
+        stage.addChild(willowIcon);
+        stage.removeChild(willowIconHover);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    willowIconHover.on("click", willowPage);
+    
+    
+    
+     whiteIcon.on("mouseover", function () {
+        stage.addChild(whiteIconHover);
+        stage.removeChild(whiteIcon);
+        console.log("mouseover");
+        //        playSound("click");
+    });
+    whiteIconHover.on("mouseout", function () {
+        stage.addChild(whiteIcon);
+        stage.removeChild(whiteIconHover);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    whiteIconHover.on("click", whitePage);
+
+    
+    westernIcon.on("mouseover", function () {
+        stage.addChild(westernIconHover);
+        stage.removeChild(westernIcon);
+        console.log("mouseover");
+        //        playSound("click");
+    });
+    westernIconHover.on("mouseout", function () {
+        stage.addChild(westernIcon);
+        stage.removeChild(westernIconHover);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    westernIconHover.on("click", westernPage);
+    
+    
+    
+    blackIcon.on("mouseover", function () {
+        stage.addChild(blackIconHover);
+        stage.removeChild(blackIcon);
+        console.log("mouseover");
+        //        playSound("click");
+    });
+    blackIconHover.on("mouseout", function () {
+        stage.addChild(blackIcon);
+        stage.removeChild(blackIconHover);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    blackIconHover.on("click", blackPage);
+    
+    
+     cascaraIcon.on("mouseover", function () {
+        stage.addChild(cascaraIconHover);
+        stage.removeChild(cascaraIcon);
+        console.log("mouseover");
+        //        playSound("click");
+    });
+    cascaraIconHover.on("mouseout", function () {
+        stage.addChild(cascaraIcon);
+        stage.removeChild(cascaraIconHover);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    cascaraIconHover.on("click", cascaraPage);
+    
+    tremplingIcon.on("mouseover", function () {
+        stage.addChild(tremplingIconHover);
+        stage.removeChild(tremplingIcon);
+        console.log("mouseover");
+        //        playSound("click");
+    });
+    tremplingIconHover.on("mouseout", function () {
+        stage.addChild(tremplingIcon);
+        stage.removeChild(tremplingIconHover);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    tremplingIconHover.on("click", tremplingPage);
+}
+
+function willowPage() {
+    //    stage.removeChild(willow);
+    //    stage.removeChild(white);
+    //    stage.removeChild(western);
+    //    stage.removeChild(trembling);
+    //    stage.removeChild(cascara);
+    //    stage.removeChild(black);
+
+    //     stage.removeChild(willow);
+    stage.removeChild(white);
+    stage.removeChild(western);
+    stage.removeChild(trembling);
+    stage.removeChild(cascara);
+    stage.removeChild(black);
+    stage.addChild(willow);
+
+    addIcons();
+}
+
+function whitePage() {
+
+    stage.removeChild(willow);
+//    stage.removeChild(white);
+    stage.removeChild(western);
+    stage.removeChild(trembling);
+    stage.removeChild(cascara);
+    stage.removeChild(black);
+    stage.addChild(white);
+
+    addIcons();
+}
+
+function westernPage() {
+    stage.removeChild(willow);
+    stage.removeChild(white);
+//    stage.removeChild(western);
+    stage.removeChild(trembling);
+    stage.removeChild(cascara);
+    stage.removeChild(black);
+    stage.addChild(western);
+
+    addIcons();
+}
+
+function blackPage() {
+    stage.removeChild(willow);
+    stage.removeChild(white);
+    stage.removeChild(western);
+    stage.removeChild(trembling);
+    stage.removeChild(cascara);
+//    stage.removeChild(black);
+    stage.addChild(black);
+
+    addIcons();
+}
+
+function cascaraPage() {
+    stage.removeChild(willow);
+    stage.removeChild(white);
+    stage.removeChild(western);
+    stage.removeChild(trembling);
+//    stage.removeChild(cascara);
+    stage.removeChild(black);
+    stage.addChild(cascara);
+
+    addIcons();
+}
+
+function tremplingPage() {
+    stage.removeChild(willow);
+    stage.removeChild(white);
+    stage.removeChild(western);
+//    stage.removeChild(trembling);
+    stage.removeChild(cascara);
+    stage.removeChild(black);
+    stage.addChild(trembling);
+
+    addIcons();
+}
+
+function addIcons() {
+    stage.addChild(willowIcon, whiteIcon, westernIcon, tremplingIcon, cascaraIcon, blackIcon);
+
 }
 
 function ok() {
-    stage.removeChild(okButton);
-    stage.removeChild(warning);
+    okButton.visible = false;
+    warning.visible = false;
+
     clicked = true;
 
 }
@@ -174,76 +353,76 @@ function setupManifest() {
     manifest = [
 
         {
-            src: "images/willowIcon.png",
+            src: "images/icons/willowIcon.png",
             id: "willowIcon"
         },
         {
-            src: "images/willowIconHover.png",
+            src: "images/hover/willowIconHover.png",
             id: "willowIconHover"
         },
         {
-            src: "images/whiteIcon.png",
+            src: "images/icons/whiteIcon.png",
             id: "whiteIcon"
         },
         {
-            src: "images/whiteIconHover.png",
+            src: "images/hover/whiteIconHover.png",
             id: "whiteIconHover"
         },
         {
-            src: "images/westernIcon.png",
+            src: "images/icons/westernIcon.png",
             id: "westernIcon"
         },
         {
-            src: "images/westernIconHover.png",
+            src: "images/hover/westernIconHover.png",
             id: "westernIconHover"
         },
         {
-            src: "images/cascaraIcon.png",
+            src: "images/icons/cascaraIcon.png",
             id: "cascaraIcon"
         }, {
-            src: "images/cascaraIconHover.png",
+            src: "images/hover/cascaraIconHover.png",
             id: "cascaraIconHover"
         },
         {
-            src: "images/tremplingIcon.png",
+            src: "images/icons/tremplingIcon.png",
             id: "tremplingIcon"
         }, {
-            src: "images/tremplingIconHover.png",
+            src: "images/hover/tremplingIconHover.png",
             id: "tremplingIconHover"
         }, {
-            src: "images/blackIcon.png",
+            src: "images/icons/blackIcon.png",
             id: "blackIcon"
         },
         {
-            src: "images/blackIconHover.png",
+            src: "images/hover/blackIconHover.png",
             id: "blackIconHover"
         },
         {
-            src: "images/willow.png",
+            src: "images/pages/willow.png",
             id: "willow"
         },
         {
-            src: "images/white.png",
+            src: "images/pages/white.png",
             id: "white"
         },
         {
-            src: "images/western.png",
+            src: "images/pages/western.png",
             id: "western"
         },
         {
-            src: "images/trembling.png",
+            src: "images/pages/trembling.png",
             id: "trembling"
         },
         {
-            src: "images/cascara.png",
+            src: "images/pages/cascara.png",
             id: "cascara"
         },
         {
-            src: "images/black.png",
+            src: "images/pages/black.png",
             id: "black"
         },
         {
-            src: "images/warning.png",
+            src: "images/pages/warning.png",
             id: "warning"
         },
         {
@@ -304,6 +483,7 @@ function handleFileLoad(event) {
         okButton = new createjs.Bitmap(event.result);
     } else if (event.item.id == "okButtonPressed") {
         okButtonPressed = new createjs.Bitmap(event.result);
+        //icons
     } else if (event.item.id == "willowIcon") {
         willowIcon = new createjs.Bitmap(event.result);
     } else if (event.item.id == "whiteIcon") {
@@ -316,6 +496,21 @@ function handleFileLoad(event) {
         cascaraIcon = new createjs.Bitmap(event.result);
     } else if (event.item.id == "blackIcon") {
         blackIcon = new createjs.Bitmap(event.result);
+    }
+
+    //hover 
+    else if (event.item.id == "willowIconHover") {
+        willowIconHover = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "whiteIconHover") {
+        whiteIconHover = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "westernIconHover") {
+        westernIconHover = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "tremplingIconHover") {
+        tremplingIconHover = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "cascaraIconHover") {
+        cascaraIconHover = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "blackIconHover") {
+        blackIconHover = new createjs.Bitmap(event.result);
     }
 }
 
