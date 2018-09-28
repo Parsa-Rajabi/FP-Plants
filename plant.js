@@ -1,8 +1,8 @@
 /**
  * BCLearningNetwork.com
- * [Game Name]   
+ * FT Plants   
  * @author Parsa Rajabi - ParsaRajabiPR@gmail.com
- * Date [Month/Year]
+ * Date September 2018
  */
 
 //// VARIABLES ////
@@ -11,6 +11,7 @@ var mute = false;
 var FPS = 20;
 var STAGE_WIDTH, STAGE_HEIGHT;
 var gameStarted = false;
+var clicked = false;
 
 
 // Chrome 1+
@@ -58,11 +59,17 @@ function endGame() {
  */
 function initGraphics() {
 
-//    stage.addChild(willow);
+    //    stage.addChild(willow);
     stage.addChild(warning);
-    okButton.x = 350;
-    okButton.y = 550;
-    stage.addChild(okButton);
+    okButton.x = okButtonPressed.x = 350;
+    okButton.y = okButtonPressed.y = 550;
+    
+    if(!clicked){
+        stage.addChild(okButton);
+    }else if (clicked){
+        stage.removeChild(okButton);
+        stage.addChild(willow);
+    }
     initMuteUnMuteButtons();
     initListeners();
 
@@ -97,35 +104,111 @@ function initMuteUnMuteButtons() {
  */
 function initListeners() {
 
+    okButton.on("mouseover", function () {
+        stage.addChild(okButtonPressed);
+        stage.removeChild(okButton);
+        console.log("mouseover");
+//        playSound("click");
+    });
+    okButtonPressed.on("mouseout", function () {
+        stage.addChild(okButton);
+        stage.removeChild(okButtonPressed);
+        console.log("mouseout");
+    });
+    //once pressed, the fire function will be called 
+    okButtonPressed.on("click", ok);
 }
 
-
+function ok() {
+    clicked = true;
+    stage.removeChild(okButton);
+//    stage.removeChild(okButtonPressed);
+    stage.removeChild(warning);
+    stage.addChild(willow);
+}
 
 //////////////////////// PRELOADJS FUNCTIONS
 
 // bitmap variables
 var muteButton, unmuteButton;
 var willow, white, western, trembling, cascara, black;
+var willowIcon, whiteIcon, westernIcon, tremplingIcon, cascaraIcon, blackIcon;
 var warning, okButton, okButtonPressed;
 /*
  * Add files to be loaded here.
  */
 function setupManifest() {
     manifest = [
-       
-        {src: "images/willow.png", id: "willow" },
-        {src: "images/white.png", id: "white" },
-        {src: "images/western.png", id: "western" },
-        {src: "images/trembling.png", id: "trembling" },
-        {src: "images/cascara.png", id: "cascara" },
-        {src: "images/black.png", id: "black" },
-        {src: "images/warning.png", id: "warning" },
-        {src: "images/ok.png", id: "okButton" },
-        {src: "images/okPressed.png", id: "okButtonPressed" },
+ 
+        {
+            src: "images/willowIcon.png",
+            id: "willowIcon"
+        },
+        {
+            src: "images/whiteIcon.png",
+            id: "whiteIcon"
+        },
+        {
+            src: "images/westernIcon.png",
+            id: "westernIcon"
+        },
+        {
+            src: "images/cascaraIcon.png",
+            id: "cascaraIcon"
+        },
+        {
+            src: "images/tremplingIcon.png",
+            id: "tremplingIcon"
+        },{
+            src: "images/blackIcon.png",
+            id: "blackIcon"
+        },
         
-
-        {src: "images/mute.png", id: "mute" },
-        {src: "images/unmute.png", id: "unmute"}
+        
+        {
+            src: "images/willow.png",
+            id: "willow"
+        },
+        {
+            src: "images/white.png",
+            id: "white"
+        },
+        {
+            src: "images/western.png",
+            id: "western"
+        },
+        {
+            src: "images/trembling.png",
+            id: "trembling"
+        },
+        {
+            src: "images/cascara.png",
+            id: "cascara"
+        },
+        {
+            src: "images/black.png",
+            id: "black"
+        },
+        {
+            src: "images/warning.png",
+            id: "warning"
+        },
+        {
+            src: "images/ok.png",
+            id: "okButton"
+        },
+        {
+            src: "images/okPressed.png",
+            id: "okButtonPressed"
+        },
+        {
+            src: "images/mute.png",
+            id: "mute"
+        },
+        {
+            src: "images/unmute.png",
+            id: "unmute"
+        }   
  	];
 }
 
@@ -146,18 +229,30 @@ function startPreload() {
 function handleFileLoad(event) {
     console.log("A file has loaded of type: " + event.item.type);
     // create bitmaps of images
-    if (event.item.id == "mute") { muteButton = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "unmute") { unmuteButton = new createjs.Bitmap(event.result);
-                                           
-    } else if (event.item.id == "willow") { willow = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "white") { white = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "western") { western = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "trembling") { trembling = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "cascara") { cascara = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "black") { black = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "warning") { warning = new createjs.Bitmap(event.result);
-    } else if (event.item.id == "okButton") { okButton = new createjs.Bitmap(event.result);
-    }else if (event.item.id == "okButtonPressed") { okButtonPressed = new createjs.Bitmap(event.result);
+    if (event.item.id == "mute") {
+        muteButton = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "unmute") {
+        unmuteButton = new createjs.Bitmap(event.result);
+
+    } else if (event.item.id == "willow") {
+        willow = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "white") {
+        white = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "western") {
+        western = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "trembling") {
+        trembling = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "cascara") {
+        cascara = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "black") {
+        black = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "warning") {
+        warning = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "okButton") {
+        okButton = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "okButtonPressed") {
+        okButtonPressed = new createjs.Bitmap(event.result);
+    }
 }
 
 function loadError(evt) {
@@ -179,7 +274,7 @@ function loadComplete(event) {
     createjs.Ticker.setFPS(FPS);
     createjs.Ticker.addEventListener("tick", update); // call update function
 
-//    stage.addChild(background);
+    //    stage.addChild(background);
     stage.update();
     initGraphics();
 }
