@@ -14,6 +14,7 @@ var gameStarted = false;
 var clicked = false;
 
 
+
 // Chrome 1+
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 
@@ -40,7 +41,14 @@ function init() {
 
 
 function update(event) {
-    if (gameStarted) {}
+    if (gameStarted) {
+        //        if (clicked){
+        //            console.log(clicked + " wow ");
+
+        //        }
+
+        //            addScreen = true;
+    }
 
     stage.update(event);
 }
@@ -58,21 +66,46 @@ function endGame() {
  * Place graphics and add them to the stage.
  */
 function initGraphics() {
-
-    //    stage.addChild(willow);
     stage.addChild(warning);
     okButton.x = okButtonPressed.x = 350;
     okButton.y = okButtonPressed.y = 550;
-    
-    if(!clicked){
-        stage.addChild(okButton);
-    }else if (clicked){
-        stage.removeChild(okButton);
-        stage.addChild(willow);
-    }
+    stage.addChild(okButton);
+
+    willowIcon.y = 14.25;
+    willowIcon.x = 20;
+
+    //    if (addScreen) {
+    stage.addChild(willow);
+    stage.addChild(willowIcon);
+
+    //    }
+    //    okButton.x  = 350;
+    //    okButton.y  = 550;
+    //
+    //    if (!clicked) {
+    //    } else if (clicked) {
+    //        stage.removeChild(okButton);
+    //        stage.addChild(willow);
+    //    }
+
+
+
+    //    whiteIcon.y = westernIcon.y = blackIcon.y = cascaraIcon.y = tremplingIcon.y = 14.25;
+
+    //    var iconX = 10;
+
+
+    //    whiteIcon.x = iconX + 10;
+    //    westernIcon.x = iconX
+    //    blackIcon.x = 
+    //    cascaraIcon.x = 
+    //    tremplingIcon.x = 
+
+    //     whiteIcon, westernIcon, blackIcon, cascaraIcon, tremplingIcon
+    //    stage.addChild(willowIcon);
+
     initMuteUnMuteButtons();
     initListeners();
-
     // start the game
     gameStarted = true;
     stage.update();
@@ -108,7 +141,7 @@ function initListeners() {
         stage.addChild(okButtonPressed);
         stage.removeChild(okButton);
         console.log("mouseover");
-//        playSound("click");
+        //        playSound("click");
     });
     okButtonPressed.on("mouseout", function () {
         stage.addChild(okButton);
@@ -120,11 +153,10 @@ function initListeners() {
 }
 
 function ok() {
-    clicked = true;
     stage.removeChild(okButton);
-//    stage.removeChild(okButtonPressed);
     stage.removeChild(warning);
-    stage.addChild(willow);
+    clicked = true;
+
 }
 
 //////////////////////// PRELOADJS FUNCTIONS
@@ -133,38 +165,59 @@ function ok() {
 var muteButton, unmuteButton;
 var willow, white, western, trembling, cascara, black;
 var willowIcon, whiteIcon, westernIcon, tremplingIcon, cascaraIcon, blackIcon;
+var willowIconHover, whiteIconHover, westernIconHover, tremplingIconHover, cascaraIconHover, blackIconHover;
 var warning, okButton, okButtonPressed;
 /*
  * Add files to be loaded here.
  */
 function setupManifest() {
     manifest = [
- 
+
         {
             src: "images/willowIcon.png",
             id: "willowIcon"
+        },
+        {
+            src: "images/willowIconHover.png",
+            id: "willowIconHover"
         },
         {
             src: "images/whiteIcon.png",
             id: "whiteIcon"
         },
         {
+            src: "images/whiteIconHover.png",
+            id: "whiteIconHover"
+        },
+        {
             src: "images/westernIcon.png",
             id: "westernIcon"
         },
         {
+            src: "images/westernIconHover.png",
+            id: "westernIconHover"
+        },
+        {
             src: "images/cascaraIcon.png",
             id: "cascaraIcon"
+        }, {
+            src: "images/cascaraIconHover.png",
+            id: "cascaraIconHover"
         },
         {
             src: "images/tremplingIcon.png",
             id: "tremplingIcon"
-        },{
+        }, {
+            src: "images/tremplingIconHover.png",
+            id: "tremplingIconHover"
+        }, {
             src: "images/blackIcon.png",
             id: "blackIcon"
         },
-        
-        
+        {
+            src: "images/blackIconHover.png",
+            id: "blackIconHover"
+        },
         {
             src: "images/willow.png",
             id: "willow"
@@ -208,7 +261,7 @@ function setupManifest() {
         {
             src: "images/unmute.png",
             id: "unmute"
-        }   
+        }
  	];
 }
 
@@ -233,7 +286,6 @@ function handleFileLoad(event) {
         muteButton = new createjs.Bitmap(event.result);
     } else if (event.item.id == "unmute") {
         unmuteButton = new createjs.Bitmap(event.result);
-
     } else if (event.item.id == "willow") {
         willow = new createjs.Bitmap(event.result);
     } else if (event.item.id == "white") {
@@ -252,6 +304,18 @@ function handleFileLoad(event) {
         okButton = new createjs.Bitmap(event.result);
     } else if (event.item.id == "okButtonPressed") {
         okButtonPressed = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "willowIcon") {
+        willowIcon = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "whiteIcon") {
+        whiteIcon = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "westernIcon") {
+        westernIcon = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "tremplingIcon") {
+        tremplingIcon = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "cascaraIcon") {
+        cascaraIcon = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "blackIcon") {
+        blackIcon = new createjs.Bitmap(event.result);
     }
 }
 
