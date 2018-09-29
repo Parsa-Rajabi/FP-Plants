@@ -42,7 +42,7 @@ function init() {
 
 function update(event) {
     if (gameStarted) {
-            stage.enableMouseOver(50); // Default, checks the mouse 20 times/second for hovering cursor changes
+        stage.enableMouseOver(50); // Default, checks the mouse 20 times/second for hovering cursor changes
 
         if (okButton.visible == false) {
             clicked = true;
@@ -91,10 +91,11 @@ function initGraphics() {
 
 
     stage.addChild(willow);
-    stage.addChild(willowIcon, whiteIcon, westernIcon, blackIcon, cascaraIcon, tremplingIcon);
-
+    addIcons();
+    addTabs();
     stage.addChild(warning);
     stage.addChild(okButton);
+
     initMuteUnMuteButtons();
     initListeners();
     // start the game
@@ -120,7 +121,7 @@ function initMuteUnMuteButtons() {
     muteButton.on("click", toggleMute);
     unmuteButton.on("click", toggleMute);
 
-//    stage.addChild(unmuteButton);
+    //    stage.addChild(unmuteButton);
 }
 
 /*
@@ -128,120 +129,147 @@ function initMuteUnMuteButtons() {
  */
 function initListeners() {
 
+    //okButton
     okButton.on("mouseover", function () {
         stage.addChild(okButtonPressed);
         stage.removeChild(okButton);
-
-        //        playSound("click");
     });
     okButtonPressed.on("mouseout", function () {
         stage.addChild(okButton);
         stage.removeChild(okButtonPressed);
-
     });
-    //once pressed, the fire function will be called 
     okButtonPressed.on("click", ok);
 
 
-
-    willowIcon.on("mouseover", function () {
-        if (clicked) {
-            stage.addChild(willowIconHover);
-            stage.removeChild(willowIcon);
-        }
-    });
-    willowIconHover.on("mouseout", function () {
-        stage.addChild(willowIcon);
-        stage.removeChild(willowIconHover);
-
-    });
-    //once pressed, the fire function will be called 
+    //willow
+    willowIcon.on("mouseover", willowMouseOver);
+    willowIconHover.on("mouseout", willowMouseOut);
     willowIconHover.on("click", willowPage);
 
+    willowTab.on("mouseover", willowMouseOver);
+    willowTab.on("mouseout", willowMouseOut);
+    willowTab.on("click", willowPage);
 
-
-    whiteIcon.on("mouseover", function () {
-        if (clicked) {
-            stage.addChild(whiteIconHover);
-            stage.removeChild(whiteIcon);
-        }
-
-    });
-    whiteIconHover.on("mouseout", function () {
-
-        stage.addChild(whiteIcon);
-        stage.removeChild(whiteIconHover);
-
-    });
-    //once pressed, the fire function will be called 
+    //white
+    whiteIcon.on("mouseover", whiteMouseOver);
+    whiteIconHover.on("mouseout", whiteMouseOut);
     whiteIconHover.on("click", whitePage);
 
+    whiteTab.on("mouseover", whiteMouseOver);
+    whiteTab.on("mouseout", whiteMouseOut);
+    whiteTab.on("click", whitePage);
 
-    westernIcon.on("mouseover", function () {
-        if (clicked) {
-            stage.addChild(westernIconHover);
-            stage.removeChild(westernIcon);
-        }
-
-    });
-    westernIconHover.on("mouseout", function () {
-        stage.addChild(westernIcon);
-        stage.removeChild(westernIconHover);
-
-    });
-    //once pressed, the fire function will be called 
+    //western
+    westernIcon.on("mouseover", westernMouseOver);
+    westernIconHover.on("mouseout", westernMouseOut);
     westernIconHover.on("click", westernPage);
 
+    westernTab.on("mouseover", westernMouseOver);
+    westernTab.on("mouseout", westernMouseOut);
+    westernTab.on("click", westernPage);
 
-
-    blackIcon.on("mouseover", function () {
-        if (clicked) {
-            stage.addChild(blackIconHover);
-            stage.removeChild(blackIcon);
-        }
-    });
-    blackIconHover.on("mouseout", function () {
-        stage.addChild(blackIcon);
-        stage.removeChild(blackIconHover);
-
-    });
-    //once pressed, the fire function will be called 
+    //black
+    blackIcon.on("mouseover", blackMouseOver);
+    blackIconHover.on("mouseout", blackMouseOut);
     blackIconHover.on("click", blackPage);
 
+    blackTab.on("mouseover", blackMouseOver);
+    blackTab.on("mouseout", blackMouseOut);
+    blackTab.on("click", blackPage);
 
-    cascaraIcon.on("mouseover", function () {
-        if (clicked) {
-            stage.addChild(cascaraIconHover);
-            stage.removeChild(cascaraIcon);
-        }
-
-
-    });
-    cascaraIconHover.on("mouseout", function () {
-        stage.addChild(cascaraIcon);
-        stage.removeChild(cascaraIconHover);
-
-    });
-    //once pressed, the fire function will be called 
+    //cascara
+    cascaraIcon.on("mouseover", cascaraMouseOver);
+    cascaraIconHover.on("mouseout", cascaraMouseOut);
     cascaraIconHover.on("click", cascaraPage);
 
-    tremplingIcon.on("mouseover", function () {
-        if (clicked) {
+    cascaraTab.on("mouseover", cascaraMouseOver);
+    cascaraTab.on("mouseout", cascaraMouseOut);
+    cascaraTab.on("click", cascaraPage);
+
+    //trempling
+    tremplingIcon.on("mouseover", tremplingMouseOver);
+    tremplingIconHover.on("mouseout", tremplingMouseOut);
+    tremplingIconHover.on("click", tremplingPage);
+    
+    tremplingTab.on("mouseover", tremplingMouseOver);
+    tremplingTab.on("mouseout", tremplingMouseOut);
+    tremplingTab.on("click", tremplingPage);
+}
+
+function willowMouseOver() {
+    if (clicked) {
+        stage.addChild(willowIconHover);
+        stage.removeChild(willowIcon);
+    }
+}
+
+function willowMouseOut() {
+    stage.addChild(willowIcon);
+    stage.removeChild(willowIconHover);
+}
+
+
+function whiteMouseOver() {
+    if (clicked) {
+        stage.addChild(whiteIconHover);
+        stage.removeChild(whiteIcon);
+    }
+}
+
+function whiteMouseOut() {
+    stage.addChild(whiteIcon);
+    stage.removeChild(whiteIconHover);
+
+}
+
+
+function westernMouseOver() {
+    if (clicked) {
+        stage.addChild(westernIconHover);
+        stage.removeChild(westernIcon);
+    }
+}
+
+function westernMouseOut() {
+    stage.addChild(westernIcon);
+    stage.removeChild(westernIconHover);
+}
+
+function blackMouseOver() {
+    if (clicked) {
+        stage.addChild(blackIconHover);
+        stage.removeChild(blackIcon);
+    }
+}
+
+function blackMouseOut() {
+    stage.addChild(blackIcon);
+    stage.removeChild(blackIconHover);
+}
+
+function cascaraMouseOver() {
+    if (clicked) {
+        stage.addChild(cascaraIconHover);
+        stage.removeChild(cascaraIcon);
+    }
+}
+
+function cascaraMouseOut() {
+    stage.addChild(cascaraIcon);
+    stage.removeChild(cascaraIconHover);
+}
+
+function tremplingMouseOver(){
+     if (clicked) {
             stage.addChild(tremplingIconHover);
             stage.removeChild(tremplingIcon);
         }
-
-
-    });
-    tremplingIconHover.on("mouseout", function () {
-        stage.addChild(tremplingIcon);
-        stage.removeChild(tremplingIconHover);
-
-    });
-    //once pressed, the fire function will be called 
-    tremplingIconHover.on("click", tremplingPage);
 }
 
+function tremplingMouseOut(){
+       stage.addChild(tremplingIcon);
+        stage.removeChild(tremplingIconHover);
+}
 function willowPage() {
     //    stage.removeChild(willow);
     //    stage.removeChild(white);
@@ -259,6 +287,7 @@ function willowPage() {
     stage.addChild(willow);
 
     addIcons();
+    addTabs();
 }
 
 function whitePage() {
@@ -272,6 +301,7 @@ function whitePage() {
     stage.addChild(white);
 
     addIcons();
+    addTabs();
 }
 
 function westernPage() {
@@ -284,6 +314,7 @@ function westernPage() {
     stage.addChild(western);
 
     addIcons();
+    addTabs();
 }
 
 function blackPage() {
@@ -296,6 +327,7 @@ function blackPage() {
     stage.addChild(black);
 
     addIcons();
+    addTabs();
 }
 
 function cascaraPage() {
@@ -308,6 +340,7 @@ function cascaraPage() {
     stage.addChild(cascara);
 
     addIcons();
+    addTabs();
 }
 
 function tremplingPage() {
@@ -320,10 +353,15 @@ function tremplingPage() {
     stage.addChild(trembling);
 
     addIcons();
+    addTabs();
 }
 
 function addIcons() {
     stage.addChild(willowIcon, whiteIcon, westernIcon, tremplingIcon, cascaraIcon, blackIcon);
+}
+
+function addTabs() {
+    stage.addChild(willowTab, whiteTab, westernTab, tremplingTab, cascaraTab, blackTab);
 }
 
 function ok() {
@@ -340,6 +378,7 @@ var muteButton, unmuteButton;
 var willow, white, western, trembling, cascara, black;
 var willowIcon, whiteIcon, westernIcon, tremplingIcon, cascaraIcon, blackIcon;
 var willowIconHover, whiteIconHover, westernIconHover, tremplingIconHover, cascaraIconHover, blackIconHover;
+var willowTab, whiteTab, westernTab, tremplingTab, cascaraTab, blackTab;
 var warning, okButton, okButtonPressed;
 /*
  * Add files to be loaded here.
@@ -347,6 +386,25 @@ var warning, okButton, okButtonPressed;
 function setupManifest() {
     manifest = [
 
+        {
+            src: "images/tabs/willowTab.png",
+            id: "willowTab"
+        }, {
+            src: "images/tabs/whiteTab.png",
+            id: "whiteTab"
+        }, {
+            src: "images/tabs/westernTab.png",
+            id: "westernTab"
+        }, {
+            src: "images/tabs/blackTab.png",
+            id: "blackTab"
+        }, {
+            src: "images/tabs/cascaraTab.png",
+            id: "cascaraTab"
+        }, {
+            src: "images/tabs/tremblingTab.png",
+            id: "tremblingTab"
+        },
         {
             src: "images/icons/willowIcon.png",
             id: "willowIcon"
@@ -393,27 +451,27 @@ function setupManifest() {
             id: "blackIconHover"
         },
         {
-            src: "images/pages/willow.png",
+            src: "images/newPages/willow.png",
             id: "willow"
         },
         {
-            src: "images/pages/white.png",
+            src: "images/newPages/white.png",
             id: "white"
         },
         {
-            src: "images/pages/western.png",
+            src: "images/newPages/western.png",
             id: "western"
         },
         {
-            src: "images/pages/trembling.png",
+            src: "images/newPages/trembling.png",
             id: "trembling"
         },
         {
-            src: "images/pages/cascara.png",
+            src: "images/newPages/cascara.png",
             id: "cascara"
         },
         {
-            src: "images/pages/black.png",
+            src: "images/newPages/black.png",
             id: "black"
         },
         {
@@ -478,8 +536,25 @@ function handleFileLoad(event) {
         okButton = new createjs.Bitmap(event.result);
     } else if (event.item.id == "okButtonPressed") {
         okButtonPressed = new createjs.Bitmap(event.result);
-        //icons
-    } else if (event.item.id == "willowIcon") {
+
+        //tabs
+    } else if (event.item.id == "willowTab") {
+        willowTab = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "whiteTab") {
+        whiteTab = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "westernTab") {
+        westernTab = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "tremblingTab") {
+        tremplingTab = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "cascaraTab") {
+        cascaraTab = new createjs.Bitmap(event.result);
+    } else if (event.item.id == "blackTab") {
+        blackTab = new createjs.Bitmap(event.result);
+    }
+
+
+    //icons
+    else if (event.item.id == "willowIcon") {
         willowIcon = new createjs.Bitmap(event.result);
     } else if (event.item.id == "whiteIcon") {
         whiteIcon = new createjs.Bitmap(event.result);
