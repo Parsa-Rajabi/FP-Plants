@@ -15,6 +15,7 @@ var STAGE_WIDTH, STAGE_HEIGHT;
 var gameStarted = false;
 var clicked = false;
 
+
 // Chrome 1+
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 
@@ -68,7 +69,7 @@ function endGame() {
 function initGraphics() {
 
     okButton.x = okButtonPressed.x = 350;
-    okButton.y = okButtonPressed.y = 550;
+    okButton.y = okButtonPressed.y = 600;
 
     willowIcon.x = willowIconHover.x = 14.25;
     willowIcon.y = willowIconHover.y = 20;
@@ -270,6 +271,7 @@ function tremplingMouseOut(){
        stage.addChild(tremplingIcon);
         stage.removeChild(tremplingIconHover);
 }
+
 function willowPage() {
     //    stage.removeChild(willow);
     //    stage.removeChild(white);
@@ -365,10 +367,10 @@ function addTabs() {
 }
 
 function ok() {
-
     okButton.visible = false;
     okButtonPressed.visible = false;
     warning.visible = false;
+//    clicked = true;
 }
 
 //////////////////////// PRELOADJS FUNCTIONS
@@ -475,7 +477,7 @@ function setupManifest() {
             id: "black"
         },
         {
-            src: "images/pages/warning.png",
+            src: "images/newPages/warning.png",
             id: "warning"
         },
         {
